@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#071a49">
+<title>STORYMOTION AI</title>
+<link rel="manifest" href="manifest.json">
+<style>
+:root{--navy:#071a49;--blue:#1267e8;--gold:#ffc21a;--bg:#f2f6ff}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,Arial,sans-serif;background:var(--bg);color:#13213c}
+header{background:linear-gradient(120deg,#071a49,#1267e8);color:white;padding:20px 18px 24px;border-radius:0 0 24px 24px}
+.brand{font-weight:950;letter-spacing:.5px;font-size:22px}.tag{color:var(--gold);font-size:12px;font-weight:800;margin-top:6px}
+.hero{font-size:25px;font-weight:900;line-height:1.1;margin:17px 0 8px}.sub{color:#e1eaff;font-size:14px;line-height:1.45}
+main{padding:16px;max-width:720px;margin:auto}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{border:0;background:white;border-radius:18px;padding:17px 14px;text-align:left;box-shadow:0 4px 14px #10295b12;min-height:120px;color:#152447}
+.icon{font-size:28px}.card strong{display:block;margin:9px 0 4px;font-size:15px}.card small{color:#63718c;line-height:1.35}
+.panel{display:none;background:white;border-radius:18px;padding:18px;margin-top:15px;box-shadow:0 4px 14px #10295b12}
+.panel.active{display:block}.panel h2{margin:0 0 12px;font-size:21px}
+label{display:block;font-weight:700;font-size:13px;margin:13px 0 6px}
+input,textarea,select{width:100%;border:1px solid #d8e0ef;border-radius:12px;padding:12px;font:inherit;background:#fff}
+textarea{min-height:150px;resize:vertical}
+button.primary{border:0;background:var(--blue);color:white;border-radius:12px;padding:13px 16px;font-weight:800;width:100%;margin-top:14px}
+button.secondary{border:0;background:#eaf1ff;color:#124da8;border-radius:10px;padding:9px 12px;font-weight:700;margin:5px 4px 0 0}
+.back{background:none;border:0;color:var(--blue);font-weight:800;padding:0 0 12px}
+.item{border:1px solid #e1e8f5;border-radius:12px;padding:12px;margin:9px 0}
+.muted{font-size:12px;color:#697894;line-height:1.5}
+footer{text-align:center;padding:20px;color:#687895;font-size:12px}
+@media(max-width:380px){.grid{grid-template-columns:1fr}.hero{font-size:23px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">🎬 STORYMOTION AI</div>
+  <div class="tag">TA VIE • TON HISTOIRE • TON FILM</div>
+  <div class="hero">Donne vie à ton imagination !</div>
+  <div class="sub">Prépare tes histoires et imagine des dessins animés africains en 3D, directement depuis ton téléphone.</div>
+</header>
+<main>
+  <div id="home">
+    <div class="grid">
+      <button class="card" onclick="show('story')"><span class="icon">✍️</span><strong>Écrire une histoire</strong><small>Rédige ou prépare ton récit.</small></button>
+      <button class="card" onclick="show('character')"><span class="icon">👦🏾</span><strong>Créer un personnage</strong><small>Choisis son apparence.</small></button>
+      <button class="card" onclick="show('scenes')"><span class="icon">🎞️</span><strong>Découper en scènes</strong><small>Organise ton film.</small></button>
+      <button class="card" onclick="show('library')"><span class="icon">📚</span><strong>Mes créations</strong><small>Retrouve tes projets enregistrés.</small></button>
+    </div>
+    <p class="muted" style="text-align:center;margin-top:18px">Langues prévues : Français • Lingala • Swahili • Anglais</p>
+  </div>
+
+  <section id="story" class="panel">
+    <button class="back" onclick="show('home')">← Accueil</button>
+    <h2>✍️ Ma nouvelle histoire</h2>
+    <label for="title">Titre de l'histoire</label><input id="title" placeholder="Ex. Le rêve de Kanku">
+    <label for="narrative">Ton récit</label><textarea id="narrative" placeholder="Il était une fois, dans un village du Congo..."></textarea>
+    <label for="language">Langue de narration</label>
+    <select id="language"><option>Français</option><option>Lingala</option><option>Swahili</option><option>Anglais</option></select>
+    <button class="primary" onclick="saveStory()">Enregistrer mon histoire</button>
+  </section>
+
+  <section id="character" class="panel">
+    <button class="back" onclick="show('home')">← Accueil</button>
+    <h2>👦🏾 Créer un personnage</h2>
+    <label for="charname">Nom du personnage</label><input id="charname" placeholder="Ex. Kanku">
+    <label for="age">Âge</label><select id="age"><option>Enfant</option><option>Adolescent</option><option>Adulte</option><option>Personne âgée</option></select>
+    <label for="hair">Coiffure</label><select id="hair"><option>Cheveux courts</option><option>Tresses</option><option>Nattes</option><option>Cheveux bouclés</option><option>Autre</option></select>
+    <label for="clothes">Vêtements</label><select id="clothes"><option>Tenue africaine moderne</option><option>Tenue traditionnelle</option><option>Tenue scolaire</option><option>Tenue de travail</option></select>
+    <label for="description">Autres détails</label><textarea id="description" placeholder="Décris son visage, sa personnalité, ses couleurs..."></textarea>
+    <button class="primary" onclick="saveCharacter()">Enregistrer le personnage</button>
+  </section>
+
+  <section id="scenes" class="panel">
+    <button class="back" onclick="show('home')">← Accueil</button>
+    <h2>🎞️ Découpage du récit</h2>
+    <p class="muted">Voici une structure de départ. Tu pourras modifier les scènes à mesure que le projet évolue.</p>
+    <div id="sceneList"></div>
+    <button class="secondary" onclick="addScene()">+ Ajouter une scène</button>
+    <button class="primary" onclick="saveScenes()">Enregistrer les scènes</button>
+  </section>
+
+  <section id="library" class="panel">
+    <button class="back" onclick="show('home')">← Accueil</button>
+    <h2>📚 Ma bibliothèque</h2>
+    <div id="libraryList"></div>
+    <p class="muted">Les projets sont enregistrés sur ce téléphone et dans ce navigateur.</p>
+  </section>
+</main>
+<footer>STORYMOTION AI — Première version mobile de démonstration<br>La génération IA d'images, de voix et de vidéos sera ajoutée ensuite.</footer>
+<script>
+const $ = id => document.getElementById(id);
+let scenes = ['Présentation du héros','Son quotidien et son univers','Le problème apparaît','Les efforts et les défis','Le dénouement'];
+function show(id){
+  $('home').style.display = id==='home'?'block':'none';
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  if(id!=='home') $(id).classList.add('active');
+  if(id==='library') renderLibrary();
+  if(id==='scenes') renderScenes();
+  window.scrollTo(0,0);
+}
+function getData(){try{return JSON.parse(localStorage.getItem('storymotionData')||'{"stories":[],"characters":[],"scenes":[]}')}catch(e){return {stories:[],characters:[],scenes:[]}}}
+function setData(d){localStorage.setItem('storymotionData',JSON.stringify(d))}
+function saveStory(){
+  const title=$('title').value.trim(), text=$('narrative').value.trim();
+  if(!title||!text){alert('Ajoute un titre et écris ton histoire.');return}
+  const d=getData();d.stories.unshift({title,text,language:$('language').value,date:new Date().toLocaleDateString('fr-FR')});setData(d);
+  alert('Ton histoire est enregistrée sur ce téléphone.');$('title').value='';$('narrative').value='';show('home');
+}
+function saveCharacter(){
+  const name=$('charname').value.trim();if(!name){alert('Donne un nom au personnage.');return}
+  const d=getData();d.characters.unshift({name,age:$('age').value,hair:$('hair').value,clothes:$('clothes').value,description:$('description').value});
+  setData(d);alert('Personnage enregistré !');$('charname').value='';$('description').value='';show('home');
+}
+function renderScenes(){
+  const d=getData();if(d.scenes.length)scenes=d.scenes;
+  $('sceneList').innerHTML=scenes.map((s,i)=>`<div class="item"><label>Scène ${i+1}</label><input data-scene="${i}" value="${escapeHtml(s)}"></div>`).join('');
+}
+function addScene(){scenes.push('Nouvelle scène');renderScenes()}
+function saveScenes(){scenes=[...document.querySelectorAll('[data-scene]')].map(x=>x.value);const d=getData();d.scenes=scenes;setData(d);alert('Découpage enregistré.')}
+function renderLibrary(){
+ const d=getData(), list=[];
+ d.stories.forEach(x=>list.push(`<div class="item"><b>📖 ${escapeHtml(x.title)}</b><div class="muted">${escapeHtml(x.language)} • ${escapeHtml(x.date)}</div><p>${escapeHtml(x.text.slice(0,180))}${x.text.length>180?'…':''}</p></div>`));
+ d.characters.forEach(x=>list.push(`<div class="item"><b>👤 ${escapeHtml(x.name)}</b><div class="muted">${escapeHtml(x.age)} • ${escapeHtml(x.hair)} • ${escapeHtml(x.clothes)}</div></div>`));
+ $('libraryList').innerHTML=list.length?list.join(''):'<p class="muted">Ta bibliothèque est vide pour le moment. Commence par écrire une histoire ou créer un personnage.</p>';
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+</script>
+</body></html>

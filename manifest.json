@@ -1,0 +1,9 @@
+{
+  "name": "STORYMOTION AI",
+  "short_name": "StoryMotion",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f2f6ff",
+  "theme_color": "#071a49",
+  "description": "Prépare tes histoires et tes projets de dessins animés africains."
+}
